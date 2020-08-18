@@ -59,17 +59,18 @@ class GravizoDirective(Directive):
 
         try:
             self._format = args.pop(0).lcase()
-            if self._format not in self.known_formats:
-                format_args = (
-                    self._format,
-                    ', '.join(map(repr,
-                                  self.known_formats.keys()))
-                    )
-
-                raise KeyError("Unrecognized format %r, available formats: %s"
-                               % format_args)
         except IndexError:
             pass
+
+        if self._format not in self.known_formats:
+            format_args = (
+                self._format,
+                ', '.join(map(repr,
+                              self.known_formats.keys()))
+                )
+
+            raise KeyError("Unrecognized format %r, available formats: %s"
+                           % format_args)
 
         image = nodes.image(uri=self.image_url(contents))
         return [image]
