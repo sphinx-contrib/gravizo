@@ -21,7 +21,7 @@ class GravizoDirective(Directive):
     Example usages:
 
     ```rst
-    .. graphviz: png
+    .. gravizo: png
         @startuml
         Alice -> Bob: Authentication Request
         Bob --> Alice: Authentication Response
@@ -32,7 +32,7 @@ class GravizoDirective(Directive):
     ```
 
     ```rst
-    .. graphviz: ./path/to/graph.puml svg
+    .. gravizo: ./path/to/graph.puml svg
     ```
     """
     optional_arguments = 1
