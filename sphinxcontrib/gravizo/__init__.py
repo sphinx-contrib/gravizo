@@ -20,7 +20,7 @@ __version__ = pbr.version.VersionInfo('gravizo').version_string()
 
 
 def setup(app):
-    # type: (Sphinx) -> Dict[unicode, Any]
+    # type: (Sphinx) -> Dict[str, Any]
 
     from .gravizo import GravizoDirective
     app.add_directive("gravizo", GravizoDirective)
