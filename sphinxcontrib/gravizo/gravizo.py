@@ -77,13 +77,12 @@ class GravizoDirective(Directive):
             pass
 
         if self._format not in self.known_formats:
-            format_args = (self._format,
-                           ', '.join(map(repr, self.known_formats.keys())))
 
             return [
                 warning(
                     'gravizo: unrecognized format "%s", available formats: %s'
-                    % (format_args, ),
+                    % (self._format, ', '.join(
+                        map(repr, self.known_formats.keys()))),
                     line=self.lineno)
             ]
 
