@@ -66,7 +66,8 @@ class GravizoDirective(Directive):
                     contents = source_file.read()
             except (IOError, UnicodeDecodeError) as err:
                 return [
-                    warning('gravizo: file %r read error: %s' % (filename, err),
+                    warning('gravizo: file %r read error: %s' %
+                            (filename, err),
                             line=self.lineno)
                 ]
 
@@ -76,15 +77,14 @@ class GravizoDirective(Directive):
             pass
 
         if self._format not in self.known_formats:
-            format_args = (
-                self._format,
-                ', '.join(map(repr,
-                              self.known_formats.keys()))
-                )
+            format_args = (self._format,
+                           ', '.join(map(repr, self.known_formats.keys())))
 
             return [
-                warning("gravizo: unrecognized format %r, available formats: %s" % (format_args,),
-                        line=self.lineno)
+                warning(
+                    "gravizo: unrecognized format %r, available formats: %s" %
+                    (format_args, ),
+                    line=self.lineno)
             ]
 
         image = nodes.image(uri=self.image_url(contents))
@@ -101,4 +101,4 @@ class GravizoDirective(Directive):
         """
         Get the image url for graph data
         """
-        return self.known_formats[self._format] % (self.escape(src),)
+        return self.known_formats[self._format] % (self.escape(src), )
