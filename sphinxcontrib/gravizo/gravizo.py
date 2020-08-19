@@ -21,7 +21,7 @@ class GravizoDirective(Directive):
     Example usages:
 
     ```rst
-    .. gravizo: png
+    .. gravizo:: png
         @startuml
         Alice -> Bob: Authentication Request
         Bob --> Alice: Authentication Response
@@ -32,7 +32,7 @@ class GravizoDirective(Directive):
     ```
 
     ```rst
-    .. gravizo: ./path/to/graph.puml svg
+    .. gravizo:: ./path/to/graph.puml svg
     ```
     """
     optional_arguments = 1
@@ -46,16 +46,29 @@ class GravizoDirective(Directive):
 
     def run(self):
         args = self.arguments
+        env = self.state.document.settings.env
+        warning = self.state.document.reporter.warning
 
         if (len(args) == 0) and (len(self.content) == 0):
-            raise ValueError(
-                "gravizo needs either contents or a filename argument")
+            return [
+                warning("gravizo needs either contents or a filename argument")
+            ]
 
         if len(self.content) != 0:
             contents = self.content.join('\n')
         else:
-            with open(args.pop(0), 'r') as source_file:
-                contents = source_file.read()
+            filename = args.pop(0)
+            relfn, absfn = env.relfn2path(filename)
+            env.note_dependency(relfn)
+
+            try:
+                with open(absfn, 'r') as source_file:
+                    contents = source_file.read()
+            except (IOError, UnicodeDecodeError) as err:
+                return [
+                    warning('gravizo: file %r read error: %s' % (filename, err),
+                            line=self.lineno)
+                ]
 
         try:
             self._format = args.pop(0).lcase()
@@ -69,8 +82,10 @@ class GravizoDirective(Directive):
                               self.known_formats.keys()))
                 )
 
-            raise KeyError("Unrecognized format %r, available formats: %s"
-                           % format_args)
+            return [
+                warning("gravizo: unrecognized format %r, available formats: %s" % (format_args,),
+                        line=self.lineno)
+            ]
 
         image = nodes.image(uri=self.image_url(contents))
         return [image]

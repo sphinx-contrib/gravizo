@@ -12,7 +12,7 @@ Examples
 
 Inline graph, show as png::
 
-    .. gravizo: png
+    .. gravizo:: png
         @startuml
         Alice -> Bob: Authentication Request
         Bob --> Alice: Authentication Response
@@ -23,7 +23,7 @@ Inline graph, show as png::
 
 Load from a file, show as svg::
 
-    .. gravizo: ./path/to/graph.puml svg
+    .. gravizo:: ./path/to/graph.puml svg
 
 Links
 -----
