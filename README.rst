@@ -2,8 +2,8 @@
 sphinxcontrib-gravizo
 =====================
 
-.. image:: https://travis-ci.org/sphinxcontrib/gravizo.svg?branch=master
-    :target: https://travis-ci.org/sphinxcontrib/gravizo
+.. image:: https://travis-ci.org/sphinx-contrib/gravizo.svg?branch=master
+    :target: https://travis-ci.org/sphinx-contrib/gravizo
 
 Embed PlantUML, DOT, etc. diagrams in your documentation using Gravizo.
 
