@@ -28,5 +28,5 @@ Load from a file, show as svg::
 Links
 -----
 
-- Source: https://github.com/MikeSmithEU/sphinxcontrib-gravizo
-- Bugs: https://github.com/MikeSmithEU/sphinxcontrib-gravizo/issues
+- Source: https://github.com/sphinxcontrib/gravizo
+- Bugs: https://github.com/sphinxcontrib/gravizo/issues
