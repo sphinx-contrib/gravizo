@@ -82,8 +82,8 @@ class GravizoDirective(Directive):
 
             return [
                 warning(
-                    'gravizo: unrecognized format "%s", available formats: %s' %
-                    (format_args, ),
+                    'gravizo: unrecognized format "%s", available formats: %s'
+                    % (format_args, ),
                     line=self.lineno)
             ]
 
