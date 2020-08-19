@@ -66,7 +66,7 @@ class GravizoDirective(Directive):
                     contents = source_file.read()
             except (IOError, UnicodeDecodeError) as err:
                 return [
-                    warning('gravizo: file %r read error: %s' %
+                    warning('gravizo: file "%s" read error: %s' %
                             (filename, err),
                             line=self.lineno)
                 ]
@@ -82,7 +82,7 @@ class GravizoDirective(Directive):
 
             return [
                 warning(
-                    "gravizo: unrecognized format %r, available formats: %s" %
+                    'gravizo: unrecognized format "%s", available formats: %s' %
                     (format_args, ),
                     line=self.lineno)
             ]
